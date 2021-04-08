@@ -1,0 +1,19 @@
+syntax = "proto3";
+import "google/protobuf/empty.proto";
+
+package logger;
+
+service Logger {
+  rpc PrintText(SimpleText) returns (Result) {}
+  rpc PrintTextStream(stream SimpleText) returns (Result) {}
+  rpc PullHistory(google.protobuf.Empty) returns (stream SimpleText) {}
+}
+
+message Result {
+  bool success = 1;
+  int64 length = 2;
+}
+
+message SimpleText {
+  string text = 1;
+}
